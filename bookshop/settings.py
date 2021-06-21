@@ -26,12 +26,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # for custom app
+    'djoser',
     'rest_framework',
     'django_filters',
+    'rest_framework.authtoken',
     # for artel app
     'backend',
     'catalog',
-    'order'
+    'order',
+    'client'
 ]
 
 MIDDLEWARE = [
@@ -124,8 +127,19 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+DJOSER = {
+    'ACTIVATION_URL': '#/activate/{id}/{token}',
+    'SEND_ACTIVATION_EMAIL': False,
+}
+
+
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
 }
