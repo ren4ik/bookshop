@@ -6,7 +6,7 @@ from catalog.models import Category, Book
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('name', 'slug')
+        fields = ('name', )
 
 
 class BooksSerializer(serializers.ModelSerializer):
@@ -14,10 +14,10 @@ class BooksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = (
+            'id',
             'name',
-            'slug',
             'category',
-            'date_of_pub',
+            'year',
             'author',
             'image',
             'description',

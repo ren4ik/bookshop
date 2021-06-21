@@ -3,7 +3,6 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
-    slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
     class Meta:
         ordering = ('name',)
@@ -21,8 +20,7 @@ class Book(models.Model):
         on_delete=models.CASCADE
     )
     name = models.CharField(max_length=200, db_index=True)
-    slug = models.SlugField(max_length=200, db_index=True)
-    date_of_pub = models.DateField("Дата выпуска книги", null=True)
+    year = models.PositiveSmallIntegerField("Дата выпуска книги", null=True)
     author = models.CharField(max_length=200, db_index=True, default="Noname")
     image = models.ImageField(upload_to='books/%Y/%m/%d', blank=True)
     description = models.TextField(blank=True)
@@ -32,7 +30,7 @@ class Book(models.Model):
 
     class Meta:
         ordering = ('name',)
-        index_together = (('id', 'slug'),)
+        index_together = (('id', ),)
 
     def __str__(self):
         return self.name
