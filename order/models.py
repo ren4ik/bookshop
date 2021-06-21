@@ -2,14 +2,11 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from catalog.models import Book
+from client.models import Profile
 
 
 class Order(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=250, default="+999(99) 999 99 99")
-    email = models.EmailField()
-    address = models.CharField(max_length=250)
-    city = models.CharField(max_length=100)
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
